@@ -1,8 +1,8 @@
 # Yeastar.PBX.Report.Scheduler
 This app send email of the filtered PBX history by schedule and administrator creates/updates/deletes schedules. (Core PHP, [Medoo](https://medoo.in), [sendmail](https://sendmail.org) etc)
-``` bash
- This projected designed for [YoaStar PBX series 100](https://www.yeastar.com/s100-voip-pbx), if someone use another version pbx then some code should be changed. 
-``` 
+
+This projected designed for [YoaStar PBX series 100](https://www.yeastar.com/s100-voip-pbx), if someone use another version pbx then some code should be changed. 
+
 ## Installation for windows
 
 1. install xampp or wamp(correctly apache and php)
