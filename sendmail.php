@@ -33,7 +33,7 @@ foreach ($datamail as $mailrow) {
     $csvdata = ['Time', 'Call From', 'Call To', 'Call Duration(s)', 'Talk Duration(s)', 'Status'];
     fputcsv($fp, $csvdata, ',', "\t");
 
-    if (count($datacdr)) {
+    // if (count($datacdr)) {
       // output data of each row
       foreach ($datacdr as $cdrrow) {
         $date =  new DateTime();
@@ -53,13 +53,13 @@ foreach ($datamail as $mailrow) {
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'coolpluto1114@gmail.com';              // SMTP username
-        $mail->Password   = 'Abcd1114#';                            // SMTP password
+        $mail->Username   = 'reporttestsmtp@gmail.com';              // SMTP username
+        $mail->Password   = 'smtp1234';                            // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 587;                                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('coolpluto1114@gmail.com', 'Guy atias');
+        $mail->setFrom('reporttestsmtp@gmail.com', 'Guy atias');
         $mail->addAddress($mailrow['email']);               // Name is optional
 
         // Attachments
@@ -67,9 +67,10 @@ foreach ($datamail as $mailrow) {
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Receiver message Report!';
-        $mail->Body    = 'This message is your search schedule <b>Report!</b>';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = 'Report "'.$mailrow['name'] . '" at ' . $timeto;
+		
+        $mail->Body    = 'This report cover the pbx history from ' . $timefrom . ' to ' . $timeto;
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
         echo 'Message has been sent';
@@ -86,9 +87,9 @@ foreach ($datamail as $mailrow) {
       }
 
       
-    } else {
-      echo "0 results";
-    }
+    // } else {
+      // echo "0 results";
+    // }
 
     @fclose($fp);
     @unlink($csvFileName);

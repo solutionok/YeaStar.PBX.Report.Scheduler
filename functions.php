@@ -11,9 +11,6 @@ $database = new Medoo([
 	// required
 	'database_type' => 'mysql',
 	'database_name' => 'cdr',
-	// 'server' => '62.0.73.243',
-	// 'username' => 'SUMI',
-	// 'password' => 'SUMI2020',
 	'server' => 'localhost',
 	'username' => 'root',
 	'password' => '',
@@ -26,7 +23,6 @@ $database = new Medoo([
 ]);
 
 date_default_timezone_set('America/New_York');
-// date_default_timezone_set('Asia/Jerusalem');
 
 $weekStartDay = 0;//0:Sunday, 1:Monday, others does not support
 
@@ -34,9 +30,6 @@ $testuser = new Medoo([
 	// required
 	'database_type' => 'mysql',
 	'database_name' => 'test',
-	// 'server' => '62.0.73.243',
-	// 'username' => 'SUMI',
-	// 'password' => 'SUMI2020',
 	'server' => 'localhost',
 	'username' => 'root',
 	'password' => '',

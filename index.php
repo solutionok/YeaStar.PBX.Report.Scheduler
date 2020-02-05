@@ -41,7 +41,7 @@
                   <div class="col-sm-5">Report Name:</div>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="name" id="name" placeholder="Name...">
-                    <input type="text" class="form-control" name="iid" id="iid">
+                    <input type="hidden" class="form-control" name="iid" id="iid">
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <div class="col-sm-5">Rrunk:</div>
+                        <div class="col-sm-5">Trunk:</div>
                         <div class="col-sm-7">
                           <select class="form-control" id="drunk" name="drunk">
                             <option>All</option>
