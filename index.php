@@ -140,13 +140,13 @@
                         <div class="col-sm-5">Trunk:</div>
                         <div class="col-sm-7">
                           <select class="form-control" id="drunk" name="drunk">
-                            <option>All</option>
-                            <option>DIGIT1 (E1)</option>
-                            <option>GSM2-1(GSM)</option>
-                            <option>FXO2-3(FXO)</option>
-                            <option>FXO2-4(FXO)</option>
-                            <option>BRI2-5(BRI)</option>
-                            <option>BRI2-6(BRI)</option>
+                            <option value="">All</option>
+                            <option value="DIGIT1">DIGIT1 (E1)</option>
+                            <option value="GSM2-1">GSM2-1(GSM)</option>
+                            <option value="FXO2-3">FXO2-3(FXO)</option>
+                            <option value="FXO2-4">FXO2-4(FXO)</option>
+                            <option value="BRI2-5">BRI2-5(BRI)</option>
+                            <option value="BRI2-6">BRI2-6(BRI)</option>
                           </select>
                         </div>
                       </div>
@@ -156,14 +156,14 @@
                         <div class="col-sm-5">Communication Type:</div>
                         <div class="col-sm-7">
                           <select class="form-control" id="communicationtype" name="communicationtype">
-                            <option>All</option>
-                            <option>Inbound</option>
-                            <option>Outbount</option>
-                            <option>Internal</option>
-                            <option>Multisite Interconnect</option>
-                            <option>Callback</option>
-                            <option>Transfer</option>
-                            <option>Warning</option>
+                            <option value="">All</option>
+                            <option value="Inbound">Inbound</option>
+                            <option value="Outbount">Outbount</option>
+                            <option value="Internal">Internal</option>
+                            <!-- <option>Multisite Interconnect</option> -->
+                            <!-- <option>Callback</option> -->
+                            <option value="Transfer">Transfer</option>
+                            <!-- <option>Warning</option> -->
                           </select>
                         </div>
                       </div>
@@ -177,11 +177,11 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <div class="col-sm-7"><label class="checkbox-inline"><input type="checkbox" class="form-check-input" id="number_fuzzy" name="number_fuzzy">Number Fuzzy Search<span class="badge">!</span></label></div>
                         <div class="col-sm-5">
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -372,10 +372,10 @@
         callduration: $("#callduration").val(),
         talkduration: $("#talkduration").val(),
         status: ($("#status").val()) == 'All' ? "" : $("#status").val(),
-        drunk: $("#drunk").val(),
-        communicationtype: $("#communicationtype").val(),
+        drunk: $("#drunk").val() == 'All' ? "" : $("#drunk").val(),
+        communicationtype: $("#communicationtype").val() == 'All' ? "" : $("#communicationtype").val(),
         pincode: $("#pincode").val(),
-        number_fuzzy: $("#number_fuzzy:checked").val() ? 1 : 0,
+        // number_fuzzy: $("#number_fuzzy:checked").val() ? 1 : 0,
       };
       $.ajax({
         type: "POST",

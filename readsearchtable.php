@@ -4,22 +4,24 @@ include 'functions.php';
 
 use Medoo\Medoo;
 
-$timefrom = getTimeFrom($_POST['timefrom']);
-$timeto = getTimeTo($_POST['timefrom'], $_POST['timeto']);
+$selector = getWhere(getTimeFrom($_POST['timefrom']), 
+                    getTimeTo($_POST['timefrom'], $_POST['timeto']), 
+                    $_POST['callfrom'], 
+                    $_POST['callto'], 
+                    $_POST['callduration'], 
+                    $_POST['talkduration'], 
+                    $_POST['status'], 
+                    $_POST['drunk'], 
+                    $_POST['communicationtype'], 
+                    $_POST['pincode']);
 
- //var_dump($timefrom,$timeto);
-$data = $database->select("cdr", ["datetime","clid","dst","billable","duration","disposition"], [
-    "datetime[<>]" =>  [$timefrom, $timeto],
-		"clid[~]" => ["AND" => [$_POST['callfrom'], ""]],
-		"dst[~]" => ["AND" => [$_POST['callto'], ""]],
-		"billable[~]" => ["AND" => [$_POST['callduration'], ""]],
-		"duration[>=]" => $_POST['talkduration'],
-		"disposition[~]" => ["AND" => [$_POST['status'], ""]],
-    'LIMIT'=>[0,50],
-    'ORDER'=>['datetime'=>'DESC'],
-]);
+$selector['LIMIT'] = [0,50];
+
+$data = $database->select("cdr", ["datetime","clid","dst","billable","duration","disposition"], $selector);
+
+
 $index = 1;
-if ($data > 0) {
+if (count($data)) {
     // output data of each row
     foreach($data as $row) {
       // var_dump($row['clid']);

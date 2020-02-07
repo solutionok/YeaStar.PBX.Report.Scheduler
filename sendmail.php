@@ -18,14 +18,19 @@ foreach ($datamail as $mailrow) {
   $timetosec = strtotime($timeto);
   
   if($timetosec <= strtotime('now') && strtotime($mailrow['sented']) < strtotime(date('Y-m-d'))) {
-    $datacdr = $database->select("cdr", ["datetime", "clid", "dst", "billable", "duration", "disposition"], [
-      "datetime[<>]" =>  [$timefrom, $timeto],
-      "clid[~]" => ["AND" => [$mailrow['callfrom'], ""]],
-      "dst[~]" => ["AND" => [$mailrow['callto'], ""]],
-      "billable[~]" => ["AND" => [$mailrow['callduration'], ""]],
-      "duration[>=]" => $mailrow['talkduration'],
-      "disposition[~]" => ["AND" => [($mailrow['status'] == 'All' ? '' : $mailrow['status']), ""]]
-    ]);
+
+    $selector = getWhere($timefrom, 
+                        $timeto, 
+                        $_POST['callfrom'], 
+                        $mailrow['callto'], 
+                        $mailrow['callduration'], 
+                        $mailrow['talkduration'], 
+                        $mailrow['status'], 
+                        $mailrow['drunk'], 
+                        $mailrow['communicationtype'], 
+                        $mailrow['pincode']);
+
+    $datacdr = $database->select("cdr", ["datetime", "clid", "dst", "billable", "duration", "disposition"], $selector);
     
     $csvFileName = str_replace(':', '', 'Report_'.$mailrow['name'] . '_' . $timeto . '.csv');
     $fp = fopen($csvFileName, 'w');

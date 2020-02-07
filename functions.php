@@ -113,3 +113,45 @@ function checkLicense(){
 
 	return false;
 }
+
+function getWhere($from, $to, $callfrom, $callto, $callduration, $talkduration, $status, $drunk, $communicationtype, $pincode){
+
+	$selector = [
+	  "datetime[<>]" =>  [$from, $to],
+	  'ORDER' =>  ['datetime'=>'DESC'],
+	];
+
+	if($callfrom){
+	  $selector["clid[~]"] = $callfrom;
+	}
+
+	if($callto){
+	  $selector["dst[~]"] = $callto;
+	}
+
+	if($callduration){
+	  $selector["billable[~]"] = $callduration;
+	}
+
+	if($talkduration){
+	  $selector["duration[>=]"] = $talkduration;
+	}
+
+	if($status){
+	  $selector["disposition[~]"] = $status;
+	}
+
+	if($drunk){
+	  $selector["OR"] = ['srctrunk' => $drunk, 'dstrunk' => $drunk];
+	}
+
+	if($communicationtype){
+	  $selector["calltype"] = $communicationtype;
+	}
+
+	if($pincode){
+	  $selector["accountcode"] = $pincode;
+	}
+
+	return $selector;
+}
